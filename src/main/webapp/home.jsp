@@ -2,10 +2,28 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/resources/css/style.css">
+    <style>
+        body{
+            background-color: antiquewhite;
+            font-size: 150%;
+        }
+        #context{
+            text-align: center;
+        }
+        a {
+            color: #BA7D67;
+            border: 2px solid transparent;
+        }
+        a:hover {
+            border: 2px solid #BA7D67;
+        }
+    </style>
 </head>
 <body>
-<h2>Welcome!</h2>
-<a href="/pharmacy_war_exploded/sales">Показать список чеков</a>
+<div id="context">
+    <h1>Welcome!</h1>
+    <a href="/pharmacy_war_exploded/sales">Показать список чеков</a>
+</div>
+
 </body>
 </html>

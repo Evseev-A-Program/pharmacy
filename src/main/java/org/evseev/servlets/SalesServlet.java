@@ -10,9 +10,9 @@ import javax.servlet.ServletException;
 
 public class SalesServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String sales = new NaklTitlerService().getAllNaklTitlers();
-        req.setAttribute("sales", sales);
-        req.getRequestDispatcher("/WEB-INF/views/sales.jsp").forward(req, resp);
+        request.setAttribute("sales", sales);
+        request.getRequestDispatcher("/WEB-INF/views/sales.jsp").forward(request, response);
     }
 }
