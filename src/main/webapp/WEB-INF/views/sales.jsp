@@ -91,7 +91,7 @@
 <%
     Gson gson = new Gson();
     Sales[] sales = gson.fromJson((String) request.getAttribute("sales"), Sales[].class);
-    int itemsPerPage = 4;
+    int itemsPerPage = 3;
     int currentPage = 1;
     if (request.getAttribute("page") != null) {
         currentPage = (int) request.getAttribute("page");
