@@ -22,4 +22,6 @@ public class ChequeContent {
     private Short nds;
 
     private String srokG;
+
+
 }

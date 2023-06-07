@@ -59,12 +59,47 @@
             left: 2px;
         }
 
+        .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 5px 10px;
+            background: #F79361;
+            box-shadow: 2px 2px 0 0 #a22800;
+            position: relative;
+            user-select: none;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            box-shadow: none;
+            top: 2px;
+            left: 2px;
+        }
+
+        .pagination .current-page {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 <%
     Gson gson = new Gson();
     Sales[] sales = gson.fromJson((String) request.getAttribute("sales"), Sales[].class);
+    int itemsPerPage = 4;
+    int currentPage = 1;
+    if (request.getAttribute("page") != null) {
+        currentPage = (int) request.getAttribute("page");
+    }
+    int totalItems = sales.length;
+    int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+    int startIndex = (currentPage - 1) * itemsPerPage;
+    int endIndex = Math.min(startIndex + itemsPerPage, totalItems);
 %>
     <table class="table_price">
         <caption>Список чеков</caption>
@@ -81,7 +116,9 @@
         </tr>
         </thead>
         <tbody>
-        <% for (Sales sale : sales) { %>
+        <% for (int i = startIndex; i < endIndex; i++) {
+            Sales sale = sales[i];
+        %>
         <tr>
             <td><%= sale.getId() %></td>
             <td><%= sale.getBranch() %></td>
@@ -100,5 +137,20 @@
         </tbody>
     </table>
 
+<div class="pagination">
+    <% if (currentPage > 1) { %>
+    <a href="?page=<%= currentPage - 1 %>">&lt;</a>
+    <% } %>
+    <% for (int i = 1; i <= totalPages; i++) {
+        if (i == currentPage) { %>
+    <span class="current-page"><%= i %></span>
+    <% } else { %>
+    <a href="?page=<%= i %>"><%= i %></a>
+    <% }
+    } %>
+    <% if (currentPage < totalPages) { %>
+    <a href="?page=<%= currentPage + 1 %>">&gt;</a>
+    <% } %>
+</div>
 </body>
 </html>
